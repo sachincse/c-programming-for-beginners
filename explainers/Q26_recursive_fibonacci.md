@@ -63,6 +63,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`7`**.
+
 ### Step A — the recursive function with TWO base cases
 
 ```c
@@ -72,6 +74,8 @@ int fib(int n) {
     return fib(n - 1) + fib(n - 2);   // recursive case
 }
 ```
+🖥️ **State after Step A:** the engine works but nothing prints yet. If you called
+it directly you'd get single values, e.g. `fib(6)` returns **8**.
 
 ### Step B — print the series with a loop in main
 
@@ -89,6 +93,12 @@ int main(void) {
     return 0;
 }
 ```
+🖥️ **Output after Step B (the full program with input `7`):**
+```
+How many Fibonacci numbers do you want? 7
+Fibonacci series: 0 1 1 2 3 5 8
+```
+*(The loop printed `fib(0)` through `fib(6)` — that's 7 numbers.)*
 
 ---
 

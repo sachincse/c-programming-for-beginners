@@ -62,6 +62,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`1234`**.
+
 ### Step A — the recursive function
 
 ```c
@@ -76,6 +78,9 @@ int sumOfDigits(int number) {
 - `number % 10` → the last digit (added now).
 - `sumOfDigits(number / 10)` → the function calls itself on the **rest**.
 
+🖥️ **State after Step A:** the engine works but nothing prints yet. Calling
+`sumOfDigits(1234)` returns `4 + 3 + 2 + 1` = **10**.
+
 ### Step B — call it from main (and handle negatives)
 
 ```c
@@ -89,6 +94,11 @@ int main(void) {
     printf("Sum of digits = %d\n", sumOfDigits(number));
     return 0;
 }
+```
+🖥️ **Output after Step B (the full program with input `1234`):**
+```
+Enter a number: 1234
+Sum of digits = 10
 ```
 
 ---

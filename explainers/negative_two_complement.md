@@ -63,6 +63,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`-5`**.
+
 ### Step A — read the number and check the range
 
 ```c
@@ -72,6 +74,11 @@ int number;
 printf("Enter a number between -128 and 127: ");
 scanf("%d", &number);
 ```
+🖥️ **Output after Step A:**
+```
+Enter a number between -128 and 127: -5
+```
+`number` now holds **-5**.
 
 ### Step B — a helper to print an 8-bit array nicely
 
@@ -84,6 +91,11 @@ void printBits(int bits[]) {
     printf("\n");
 }
 ```
+🖥️ **Output after Step B:** *nothing yet* — this only **defines** a reusable tool.
+Later, if `bits = {1,1,1,1,1,0,1,1}` and we call `printBits(bits)`, it prints:
+```
+1111 1011
+```
 
 ### Step C — positive/zero case: write normal binary
 
@@ -94,6 +106,9 @@ for (int i = BITS - 1; i >= 0; i--) {  // fill from the rightmost box
     n = n / 2;
 }
 ```
+🖥️ **State after Step C:** for our example `number = -5`, this branch is **skipped**
+(it only runs for 0 or positive numbers). *If instead `number = 5`, it would fill*
+`bits = 0000 0101`.
 
 ### Step D — negative case, STEP 1: binary of the positive twin
 
@@ -105,6 +120,10 @@ for (int i = BITS - 1; i >= 0; i--) {
     n = n / 2;
 }
 ```
+🖥️ **State after Step D (number = -5):** `magnitude = 5`, and
+```
+bits = 0000 0101
+```
 
 ### Step E — STEP 2: flip every bit
 
@@ -112,6 +131,10 @@ for (int i = BITS - 1; i >= 0; i--) {
 for (int i = 0; i < BITS; i++) {
     bits[i] = 1 - bits[i];   // 0 → 1 and 1 → 0
 }
+```
+🖥️ **State after Step E:**
+```
+bits = 1111 1010   (one's complement of 0000 0101)
 ```
 
 ### Step F — STEP 3: add 1, carrying from the right
@@ -123,6 +146,14 @@ for (int i = BITS - 1; i >= 0 && carry == 1; i--) {
     bits[i] = sum % 2;   // digit stays here
     carry   = sum / 2;   // 1 if it overflows into the next box
 }
+```
+🖥️ **State after Step F:** adding 1 to `1111 1010` gives
+```
+bits = 1111 1011     ← this is -5 in two's complement ✅
+```
+And the program then calls `printBits(bits)`, so the **final output** is:
+```
+So -5 in 8-bit two's complement = 1111 1011
 ```
 
 ---

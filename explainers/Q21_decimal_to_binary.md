@@ -62,6 +62,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`13`**.
+
 ### Step A — the skeleton every C program has
 
 ```c
@@ -71,6 +73,8 @@ int main(void) {     // program starts here
     return 0;        // finished happily
 }
 ```
+🖥️ **Output after Step A:** *nothing yet* — this empty program runs and quietly
+finishes. (It's just the frame we'll fill in.)
 
 ### Step B — ask the user for a number
 
@@ -79,6 +83,11 @@ int number;
 printf("Enter a decimal number (0 or bigger): ");
 scanf("%d", &number);    // remember: scanf needs the & sign
 ```
+🖥️ **Output after Step B:**
+```
+Enter a decimal number (0 or bigger): 13
+```
+`number` now holds **13**.
 
 ### Step C — handle the easy special case (zero)
 
@@ -90,12 +99,17 @@ if (number == 0) {
 ```
 > Why? The loop below only works for numbers **bigger than 0**. Zero is just `0`.
 
+🖥️ **State after Step C:** our `number` is 13 (not 0), so this `if` is **skipped**.
+*(If the user had typed `0`, it would print `Binary = 0` and stop here.)*
+
 ### Step D — collect the remainders in a row of boxes (an array)
 
 ```c
 int bits[32];   // 32 boxes — an int is 32 bits, so this is always enough
 int count = 0;  // how many bits we've collected
 ```
+🖥️ **State after Step D:** `bits` is an empty row of 32 boxes, `count = 0`.
+Nothing prints — we're just getting our storage ready.
 
 ### Step E — the loop: divide by 2 again and again
 
@@ -106,6 +120,10 @@ while (number > 0) {
     count = count + 1;          // we stored one more bit
 }
 ```
+🖥️ **State after Step E (number = 13):** the loop fills the array and `count = 4`:
+```
+bits = [1, 0, 1, 1]   (collected bottom-to-top, so it looks reversed)
+```
 
 ### Step F — print the bits in REVERSE (bottom to top)
 
@@ -115,6 +133,10 @@ for (int i = count - 1; i >= 0; i--) {  // start from the LAST stored bit
     printf("%d", bits[i]);
 }
 printf("\n");
+```
+🖥️ **Output after Step F (the final result):**
+```
+Binary = 1101
 ```
 
 ---

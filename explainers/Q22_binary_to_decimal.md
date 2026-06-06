@@ -65,6 +65,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`1101`**.
+
 ### Step A — read the binary number
 
 We read it as a `long` (a big whole number) because `1101` is just digits to us.
@@ -74,6 +76,11 @@ long binary;
 printf("Enter a binary number (only 0s and 1s): ");
 scanf("%ld", &binary);
 ```
+🖥️ **Output after Step A:**
+```
+Enter a binary number (only 0s and 1s): 1101
+```
+`binary` now holds **1101**.
 
 ### Step B — set up the answer and the place value
 
@@ -81,6 +88,7 @@ scanf("%ld", &binary);
 int decimal = 0;     // the running total starts at 0
 int placeValue = 1;  // rightmost place is worth 1
 ```
+🖥️ **State after Step B:** `decimal = 0`, `placeValue = 1`. Nothing prints yet.
 
 ### Step C — peel digits from the right and add their value
 
@@ -92,6 +100,12 @@ while (binary > 0) {
     binary = binary / 10;                 // drop the digit we used
 }
 ```
+🖥️ **State after Step C (binary = 1101):** the loop runs 4 times and builds up
+`decimal`:
+```
+1101 → decimal=1 → decimal=1 → decimal=5 → decimal=13
+```
+`decimal` is now **13** (and `binary` has shrunk to 0, so the loop ends).
 
 ### Step D — (safety) reject anything that isn't 0 or 1
 
@@ -100,6 +114,19 @@ if (digit != 0 && digit != 1) {
     printf("That is not a valid binary number (use only 0 and 1).\n");
     return 1;
 }
+```
+🖥️ **State after Step D:** for `1101` every digit is 0 or 1, so this check never
+fires. *(If the user typed `1201`, it would print* `That is not a valid binary
+number (use only 0 and 1).` *and stop.)*
+
+### Step E — print the result
+
+```c
+printf("Decimal = %d\n", decimal);
+```
+🖥️ **Output after Step E (the final result):**
+```
+Decimal = 13
 ```
 
 ---

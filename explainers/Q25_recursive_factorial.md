@@ -71,6 +71,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`4`**.
+
 ### Step A — write a function that takes `n`
 
 ```c
@@ -80,6 +82,9 @@ long long factorial(int n) {
 ```
 > `long long` because factorials grow huge fast (`20!` is already enormous).
 
+🖥️ **State after Step A:** *nothing runs yet* — an empty function with no body.
+It's just the shape we'll fill in.
+
 ### Step B — add the base case (the STOP condition) FIRST
 
 ```c
@@ -87,12 +92,17 @@ if (n == 0 || n == 1) {
     return 1;          // we know these answers → stop here
 }
 ```
+🖥️ **State after Step B:** now `factorial(1)` would return `1` and `factorial(0)`
+would return `1`. But `factorial(4)` still does nothing — we haven't told it the
+recursive case yet.
 
 ### Step C — add the recursive case
 
 ```c
 return n * factorial(n - 1);   // the function calls ITSELF with n-1
 ```
+🖥️ **State after Step C:** the function is now complete. Calling `factorial(4)`
+returns `4 * factorial(3)` = `4 * 3 * 2 * 1` = **24**.
 
 ### Step D — call it from main
 
@@ -104,6 +114,11 @@ int main(void) {
     printf("%d! = %lld\n", n, factorial(n));
     return 0;
 }
+```
+🖥️ **Output after Step D (the full program with input `4`):**
+```
+Enter a number (0 or bigger): 4
+4! = 24
 ```
 
 ---

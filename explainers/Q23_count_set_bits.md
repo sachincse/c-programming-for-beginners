@@ -60,6 +60,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`13`** (binary `1101`).
+
 ### Step A — read the number and start a counter
 
 ```c
@@ -69,6 +71,11 @@ scanf("%d", &number);
 
 int count = 0;   // how many 1s found so far
 ```
+🖥️ **Output after Step A:**
+```
+Enter a number (0 or bigger): 13
+```
+`number = 13`, `count = 0`.
 
 ### Step B — loop through the bits
 
@@ -80,11 +87,20 @@ while (number > 0) {
     number = number / 2;     // move to the next bit
 }
 ```
+🖥️ **State after Step B (number = 13):** the loop checks each bit of `1101`:
+```
+13→bit 1 (count=1) → 6→bit 0 → 3→bit 1 (count=2) → 1→bit 1 (count=3)
+```
+`count` is now **3** (and `number` has shrunk to 0, so the loop ends).
 
 ### Step C — show the result
 
 ```c
 printf("Number of set bits (1s) = %d\n", count);
+```
+🖥️ **Output after Step C (the final result):**
+```
+Number of set bits (1s) = 3
 ```
 
 ---

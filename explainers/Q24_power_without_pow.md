@@ -63,6 +63,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`x = 2`, `n = 3`**.
+
 ### Step A — read the two numbers
 
 ```c
@@ -72,12 +74,19 @@ scanf("%d", &x);
 printf("Enter power n (0 or bigger): ");
 scanf("%d", &n);
 ```
+🖥️ **Output after Step A:**
+```
+Enter base x: 2
+Enter power n (0 or bigger): 3
+```
+`x = 2`, `n = 3`.
 
 ### Step B — start the answer at 1
 
 ```c
 long long answer = 1;   // long long because powers get BIG very fast
 ```
+🖥️ **State after Step B:** `answer = 1`. Nothing prints yet.
 
 ### Step C — multiply n times with a for-loop
 
@@ -88,10 +97,20 @@ for (int i = 1; i <= n; i++) {
 ```
 > The loop body runs once for `i = 1, 2, …, n` — that's exactly `n` times.
 
+🖥️ **State after Step C (x = 2, n = 3):** the loop multiplies 3 times:
+```
+answer: 1 → 2 → 4 → 8
+```
+`answer` is now **8**.
+
 ### Step D — print the result
 
 ```c
 printf("%d ^ %d = %lld\n", x, n, answer);   // %lld prints a long long
+```
+🖥️ **Output after Step D (the final result):**
+```
+2 ^ 3 = 8
 ```
 
 ---

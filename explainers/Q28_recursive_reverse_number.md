@@ -75,6 +75,8 @@ flowchart TD
 
 ## 5. Let's build the code step by step
 
+> 🧵 We'll thread one example through every step: the user types **`1234`**.
+
 ### Step A — the recursive function with TWO arguments
 
 ```c
@@ -86,12 +88,16 @@ int reverseNumber(int number, int rev) {
     return reverseNumber(number / 10, rev * 10 + lastDigit);  // RECURSIVE CASE
 }
 ```
+🖥️ **State after Step A:** the engine works but nothing prints yet. Calling
+`reverseNumber(1234, 0)` returns **4321**.
 
 ### Step B — call it starting with `rev = 0`
 
 ```c
 int result = reverseNumber(number, 0);
 ```
+🖥️ **State after Step B (number = 1234):** `result` now holds **4321**.
+*(We always start `rev` at 0 — an empty answer to build onto.)*
 
 ### Step C — handle negative numbers (keep the minus sign)
 
@@ -100,6 +106,20 @@ int isNegative = 0;
 if (number < 0) { isNegative = 1; number = -number; }
 int result = reverseNumber(number, 0);
 if (isNegative) result = -result;   // -1234 → -4321
+```
+🖥️ **State after Step C:** for `1234` (positive) `result` stays **4321**.
+*(If the input were `-1234`: reverse `1234` → `4321`, then re-apply the sign →
+`-4321`.)*
+
+### Step D — print the result
+
+```c
+printf("Reversed number = %d\n", result);
+```
+🖥️ **Output after Step D (the final result, input `1234`):**
+```
+Enter a number: 1234
+Reversed number = 4321
 ```
 
 ---
