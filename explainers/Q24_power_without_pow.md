@@ -146,6 +146,66 @@ so it never runs. `answer` stays `1`. Output: `5 ^ 0 = 1`. ✅
 
 ---
 
+## 7½. More worked examples — every single iteration 🔬
+
+### Example A — `x = 3`, `n = 4`  (expected `81`)
+
+| Step (`i`) | `i <= n`? | `answer` before | `answer = answer * x` |
+|---|---|---|---|
+| start | — | 1 | — |
+| 1 | 1 ≤ 4 ✅ | 1  | 1 × 3 = **3**  |
+| 2 | 2 ≤ 4 ✅ | 3  | 3 × 3 = **9**  |
+| 3 | 3 ≤ 4 ✅ | 9  | 9 × 3 = **27** |
+| 4 | 4 ≤ 4 ✅ | 27 | 27 × 3 = **81** |
+| 5 | 5 ≤ 4 ❌ | 81 | stop |
+
+✅ **Output:** `3 ^ 4 = 81`
+
+---
+
+### Example B — `x = 5`, `n = 3`  (expected `125`)
+
+| Step (`i`) | `i <= n`? | `answer` before | `answer = answer * x` |
+|---|---|---|---|
+| start | — | 1 | — |
+| 1 | 1 ≤ 3 ✅ | 1  | 1 × 5 = **5**   |
+| 2 | 2 ≤ 3 ✅ | 5  | 5 × 5 = **25**  |
+| 3 | 3 ≤ 3 ✅ | 25 | 25 × 5 = **125** |
+| 4 | 4 ≤ 3 ❌ | 125 | stop |
+
+✅ **Output:** `5 ^ 3 = 125`
+
+---
+
+### Example C — `x = 2`, `n = 10`  (expected `1024`)
+
+| Step (`i`) | `answer` before | `answer * x` |
+|---|---|---|
+| 1 | 1 | **2** |
+| 2 | 2 | **4** |
+| 3 | 4 | **8** |
+| 4 | 8 | **16** |
+| 5 | 16 | **32** |
+| 6 | 32 | **64** |
+| 7 | 64 | **128** |
+| 8 | 128 | **256** |
+| 9 | 256 | **512** |
+| 10 | 512 | **1024** |
+| (i=11) | 1024 | stop |
+
+✅ **Output:** `2 ^ 10 = 1024`  *(each step doubles — that's why bytes/KB/MB grow in powers of 2!)*
+
+---
+
+### Example D — `x = 7`, `n = 0`  (expected `1`)
+
+The loop condition `1 <= 0` is **false right away**, so the body never runs.
+`answer` stays at its starting value **1**.
+
+✅ **Output:** `7 ^ 0 = 1`  *(this is why starting at 1 is so important)*
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Starting `answer` at 0.** Then `0 × x = 0` forever — always wrong. Start at **1**.

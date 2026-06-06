@@ -150,6 +150,73 @@ int main(void) {
 
 ---
 
+## 7½. More worked examples — every single call 🔬
+
+### Example A — `sumOfDigits(9875)`  (expected `29`)
+
+**Going DOWN (peel the last digit each time):**
+
+| Call | `% 10` (added now) | `/ 10` (passed down) |
+|------|--------------------|-----------------------|
+| `sum(9875)` | 5 | `sum(987)` |
+| `sum(987)`  | 7 | `sum(98)` |
+| `sum(98)`   | 8 | `sum(9)` |
+| `sum(9)`    | 9 | `sum(0)` |
+| `sum(0)`    | — | base → returns 0 |
+
+**Coming back UP (add the returns):**
+
+| Finishing call | Calculation | Result |
+|----------------|-------------|--------|
+| `sum(0)` | base | 0 |
+| `sum(9)` | 9 + 0 | 9 |
+| `sum(98)` | 8 + 9 | 17 |
+| `sum(987)` | 7 + 17 | 24 |
+| `sum(9875)` | 5 + 24 | **29** |
+
+✅ **Output:** `Sum of digits = 29`  *(check: 9+8+7+5 = 29)*
+
+---
+
+### Example B — `sumOfDigits(505)`  (expected `10`)
+
+| Call | `% 10` | `/ 10` |
+|------|--------|--------|
+| `sum(505)` | 5 | `sum(50)` |
+| `sum(50)`  | 0 | `sum(5)` |
+| `sum(5)`   | 5 | `sum(0)` |
+| `sum(0)`   | base → 0 | — |
+
+Add up: `5 + (0 + (5 + 0))` = **10** ✅
+*(The middle `0` adds nothing — that's fine.)*
+
+---
+
+### Example C — `sumOfDigits(1000)`  (expected `1`)
+
+| Call | `% 10` | `/ 10` |
+|------|--------|--------|
+| `sum(1000)` | 0 | `sum(100)` |
+| `sum(100)`  | 0 | `sum(10)` |
+| `sum(10)`   | 0 | `sum(1)` |
+| `sum(1)`    | 1 | `sum(0)` |
+| `sum(0)`    | base → 0 | — |
+
+Add up: `0 + 0 + 0 + 1 + 0` = **1** ✅
+
+---
+
+### Example D — `sumOfDigits(7)`  (single digit)
+
+| Call | `% 10` | `/ 10` |
+|------|--------|--------|
+| `sum(7)` | 7 | `sum(0)` |
+| `sum(0)` | base → 0 | — |
+
+Add up: `7 + 0` = **7** ✅  *(a one-digit number just returns itself)*
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Wrong base case.** It must be `number == 0` (returns 0). Stopping at `1`

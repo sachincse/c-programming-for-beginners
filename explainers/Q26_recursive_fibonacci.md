@@ -159,6 +159,84 @@ And the **main loop** prints `fib(0..3)` if `count = 4`:
 
 ---
 
+## 7½. More worked examples — every single call 🔬
+
+### Example A — `fib(5)`  (expected value `5`)
+
+Break it into the two-call tree until every branch is a base case:
+
+```
+fib(5) = fib(4) + fib(3)
+fib(4) = fib(3) + fib(2)
+fib(3) = fib(2) + fib(1)
+fib(2) = fib(1) + fib(0) = 1 + 0 = 1
+```
+
+Build the values from the smallest up:
+
+| Call | Calculation | Result |
+|------|-------------|--------|
+| `fib(0)` | base | 0 |
+| `fib(1)` | base | 1 |
+| `fib(2)` | 1 + 0 | 1 |
+| `fib(3)` | fib(2)+fib(1) = 1 + 1 | 2 |
+| `fib(4)` | fib(3)+fib(2) = 2 + 1 | 3 |
+| `fib(5)` | fib(4)+fib(3) = 3 + 2 | **5** |
+
+✅ `fib(5) = 5`
+
+---
+
+### Example B — full series for `count = 7`
+
+The `main` loop calls `fib(0), fib(1), … fib(6)` and prints each:
+
+| `i` | `fib(i)` | how |
+|-----|----------|-----|
+| 0 | 0 | base |
+| 1 | 1 | base |
+| 2 | 1 | 1 + 0 |
+| 3 | 2 | 1 + 1 |
+| 4 | 3 | 2 + 1 |
+| 5 | 5 | 3 + 2 |
+| 6 | 8 | 5 + 3 |
+
+✅ **Output:** `Fibonacci series: 0 1 1 2 3 5 8`
+
+---
+
+### Example C — `count = 10`  (the full first ten)
+
+Each number = sum of the two before it:
+
+```
+0  1  1  2  3  5  8  13  21  34
+↑  ↑  └3 └5 └8 ...
+0+1=1   1+1=2   1+2=3   2+3=5   3+5=8   5+8=13   8+13=21   13+21=34
+```
+
+✅ **Output:** `Fibonacci series: 0 1 1 2 3 5 8 13 21 34`
+
+---
+
+### Example D — why it's slow: counting the calls for `fib(5)` 🐌
+
+Because every call splits into **two**, the same small values get recomputed:
+
+| Function | How many times it is called for `fib(5)` |
+|----------|------------------------------------------|
+| `fib(4)` | 1 |
+| `fib(3)` | 2 |
+| `fib(2)` | 3 |
+| `fib(1)` | 5 |
+| `fib(0)` | 3 |
+
+That's **15 calls** just for `fib(5)`! For `fib(40)` it's *billions*. This is why
+the recursive version is great for **learning** but a simple loop is better for
+**big** numbers.
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Only one base case.** You need **both** `fib(0)` and `fib(1)`, otherwise

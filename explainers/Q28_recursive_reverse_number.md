@@ -160,6 +160,68 @@ The `4321` is returned straight back up through every call.
 
 ---
 
+## 7½. More worked examples — every single call 🔬
+
+### Example A — `reverseNumber(12345, 0)`  (expected `54321`)
+
+| Call | `number` | `rev` in | `lastDigit = %10` | new `rev = rev*10 + lastDigit` | next call |
+|------|----------|----------|--------------------|--------------------------------|-----------|
+| 1 | 12345 | 0     | 5 | 0×10 + 5 = **5**       | `reverse(1234, 5)` |
+| 2 | 1234  | 5     | 4 | 5×10 + 4 = **54**      | `reverse(123, 54)` |
+| 3 | 123   | 54    | 3 | 54×10 + 3 = **543**    | `reverse(12, 543)` |
+| 4 | 12    | 543   | 2 | 543×10 + 2 = **5432**  | `reverse(1, 5432)` |
+| 5 | 1     | 5432  | 1 | 5432×10 + 1 = **54321** | `reverse(0, 54321)` |
+| 6 | 0     | 54321 | — | base → **return 54321** | — |
+
+✅ **Output:** `Reversed number = 54321`
+
+---
+
+### Example B — `reverseNumber(9080, 0)`  (expected `809`)
+
+| Call | `number` | `rev` in | `lastDigit` | new `rev` | next call |
+|------|----------|----------|-------------|-----------|-----------|
+| 1 | 9080 | 0   | 0 | 0×10 + 0 = **0**     | `reverse(908, 0)` |
+| 2 | 908  | 0   | 8 | 0×10 + 8 = **8**     | `reverse(90, 8)` |
+| 3 | 90   | 8   | 0 | 8×10 + 0 = **80**    | `reverse(9, 80)` |
+| 4 | 9    | 80  | 9 | 80×10 + 9 = **809**  | `reverse(0, 809)` |
+| 5 | 0    | 809 | — | base → **return 809** | — |
+
+✅ **Output:** `Reversed number = 809`
+*(The trailing `0` in 9080 becomes a leading `0` when reversed, and leading zeros
+just vanish in a normal number — so `0809` is simply `809`.)*
+
+---
+
+### Example C — `reverseNumber(7, 0)`  (single digit)
+
+| Call | `number` | `rev` in | `lastDigit` | new `rev` | next call |
+|------|----------|----------|-------------|-----------|-----------|
+| 1 | 7 | 0 | 7 | 0×10 + 7 = **7** | `reverse(0, 7)` |
+| 2 | 0 | 7 | — | base → **return 7** | — |
+
+✅ **Output:** `Reversed number = 7`  *(a single digit reversed is itself)*
+
+---
+
+### Example D — `number = -670`  (negative, expected `-76`)
+
+1. `isNegative = 1`, then `number = 670` (work with the positive twin).
+2. Reverse `670`:
+
+| Call | `number` | `rev` in | `lastDigit` | new `rev` |
+|------|----------|----------|-------------|-----------|
+| 1 | 670 | 0  | 0 | 0  |
+| 2 | 67  | 0  | 7 | 7  |
+| 3 | 6   | 7  | 6 | 76 |
+| 4 | 0   | 76 | — | base → return **76** |
+
+3. `isNegative` was 1, so `result = -76`.
+
+✅ **Output:** `Reversed number = -76`
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Forgetting to multiply `rev` by 10.** Without `rev * 10` you just keep

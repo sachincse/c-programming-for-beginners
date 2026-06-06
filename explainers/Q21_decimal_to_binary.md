@@ -184,6 +184,60 @@ bits[3]=1  bits[2]=1  bits[1]=0  bits[0]=1   →   1101
 
 ---
 
+## 7½. More worked examples — every single iteration 🔬
+
+### Example A — `number = 5`  (expected `101`)
+
+| Step | `number` before | `% 2` (bit) | `/ 2` (new) | `count` | `bits[]` |
+|------|------|------|------|------|------|
+| 1 | 5 | **1** | 2 | 1 | `[1]` |
+| 2 | 2 | **0** | 1 | 2 | `[1,0]` |
+| 3 | 1 | **1** | 0 | 3 | `[1,0,1]` |
+| — | 0 | stop | — | — | — |
+
+Print reversed: `bits[2]=1, bits[1]=0, bits[0]=1` → **`101`** ✅
+
+---
+
+### Example B — `number = 8`  (expected `1000`)
+
+| Step | `number` before | `% 2` (bit) | `/ 2` (new) | `count` | `bits[]` |
+|------|------|------|------|------|------|
+| 1 | 8 | **0** | 4 | 1 | `[0]` |
+| 2 | 4 | **0** | 2 | 2 | `[0,0]` |
+| 3 | 2 | **0** | 1 | 3 | `[0,0,0]` |
+| 4 | 1 | **1** | 0 | 4 | `[0,0,0,1]` |
+| — | 0 | stop | — | — | — |
+
+Print reversed: `1, 0, 0, 0` → **`1000`** ✅
+*(Notice powers of 2 are always a single `1` followed by zeros.)*
+
+---
+
+### Example C — `number = 25`  (expected `11001`)
+
+| Step | `number` before | `% 2` (bit) | `/ 2` (new) | `count` | `bits[]` |
+|------|------|------|------|------|------|
+| 1 | 25 | **1** | 12 | 1 | `[1]` |
+| 2 | 12 | **0** | 6  | 2 | `[1,0]` |
+| 3 | 6  | **0** | 3  | 3 | `[1,0,0]` |
+| 4 | 3  | **1** | 1  | 4 | `[1,0,0,1]` |
+| 5 | 1  | **1** | 0  | 5 | `[1,0,0,1,1]` |
+| — | 0 | stop | — | — | — |
+
+Print reversed: `bits[4..0] = 1,1,0,0,1` → **`11001`** ✅
+
+**Check it backwards (using Q22's place values):** `16 + 8 + 0 + 0 + 1 = 25` ✔️
+
+---
+
+### Example D — `number = 0`  (special case)
+
+The `while` loop condition `0 > 0` is **false**, so it never runs.
+That's why we handle `0` separately and print **`0`** directly. ✅
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Printing in the wrong order.** The remainders come out *backwards*; you must

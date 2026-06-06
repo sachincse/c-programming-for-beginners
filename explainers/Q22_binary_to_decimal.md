@@ -154,6 +154,64 @@ int main(void) {
 
 ---
 
+## 7½. More worked examples — every single iteration 🔬
+
+### Example A — `binary = 101`  (expected `5`)
+
+| Step | `binary` before | `digit = % 10` | `placeValue` | `digit * place` | `decimal` after | `/ 10` |
+|------|------|------|------|------|------|------|
+| 1 | 101 | **1** | 1 | 1 | 0 + 1 = **1** | 10 |
+| 2 | 10  | **0** | 2 | 0 | 1 + 0 = **1** | 1  |
+| 3 | 1   | **1** | 4 | 4 | 1 + 4 = **5** | 0  |
+| — | 0 | stop | — | — | — | — |
+
+✅ **Output:** `Decimal = 5`  *(check: 4 + 0 + 1 = 5)*
+
+---
+
+### Example B — `binary = 1000`  (expected `8`)
+
+| Step | `binary` before | `digit = % 10` | `placeValue` | `digit * place` | `decimal` after | `/ 10` |
+|------|------|------|------|------|------|------|
+| 1 | 1000 | **0** | 1 | 0 | 0 + 0 = **0** | 100 |
+| 2 | 100  | **0** | 2 | 0 | 0 + 0 = **0** | 10  |
+| 3 | 10   | **0** | 4 | 0 | 0 + 0 = **0** | 1   |
+| 4 | 1    | **1** | 8 | 8 | 0 + 8 = **8** | 0   |
+| — | 0 | stop | — | — | — | — |
+
+✅ **Output:** `Decimal = 8`  *(only the place worth 8 had a 1)*
+
+---
+
+### Example C — `binary = 1111`  (expected `15`)
+
+| Step | `binary` before | `digit` | `placeValue` | `digit * place` | `decimal` after | `/ 10` |
+|------|------|------|------|------|------|------|
+| 1 | 1111 | 1 | 1 | 1 | 0 + 1 = **1**  | 111 |
+| 2 | 111  | 1 | 2 | 2 | 1 + 2 = **3**  | 11  |
+| 3 | 11   | 1 | 4 | 4 | 3 + 4 = **7**  | 1   |
+| 4 | 1    | 1 | 8 | 8 | 7 + 8 = **15** | 0   |
+| — | 0 | stop | — | — | — | — |
+
+✅ **Output:** `Decimal = 15`  *(all four bits ON: 8+4+2+1 = 15, the max for 4 bits)*
+
+---
+
+### Example D — `binary = 10110`  (expected `22`)
+
+| Step | `binary` before | `digit` | `placeValue` | `digit * place` | `decimal` after | `/ 10` |
+|------|------|------|------|------|------|------|
+| 1 | 10110 | 0 | 1  | 0  | 0 + 0 = **0**  | 1011 |
+| 2 | 1011  | 1 | 2  | 2  | 0 + 2 = **2**  | 101  |
+| 3 | 101   | 1 | 4  | 4  | 2 + 4 = **6**  | 10   |
+| 4 | 10    | 0 | 8  | 0  | 6 + 0 = **6**  | 1    |
+| 5 | 1     | 1 | 16 | 16 | 6 + 16 = **22** | 0   |
+| — | 0 | stop | — | — | — | — |
+
+✅ **Output:** `Decimal = 22`  *(check: 16 + 0 + 4 + 2 + 0 = 22)*
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **Forgetting to double `placeValue`.** It must go `1 → 2 → 4 → 8 …`, not stay at 1.

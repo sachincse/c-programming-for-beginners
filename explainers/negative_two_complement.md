@@ -219,6 +219,93 @@ Result: `1111 1011`
 
 ---
 
+## 7½. More worked examples — every single step 🔬
+
+### Example A — `number = -1`  (expected `1111 1111`)
+
+| Step | Bits | Note |
+|------|------|------|
+| STEP 1: +1 in binary | `0000 0001` | the positive twin |
+| STEP 2: flip all bits | `1111 1110` | one's complement |
+| STEP 3: add 1 | `1111 1111` | rightmost `0`→`1`, no carry |
+
+**Add-1 detail:** rightmost bit `0 + 1 = 1`, carry becomes 0, loop stops.
+✅ **Output:** `-1 = 1111 1111`  *(all ones — a classic to memorise)*
+
+---
+
+### Example B — `number = -2`  (expected `1111 1110`)
+
+| Step | Bits | Note |
+|------|------|------|
+| STEP 1: +2 in binary | `0000 0010` | |
+| STEP 2: flip all bits | `1111 1101` | |
+| STEP 3: add 1 | `1111 1110` | rightmost `1 + 1 = 0` carry 1; next `0 + 1 = 1` |
+
+**Add-1 detail (right→left):**
+
+| i (right→left) | bit | bit + carry | new bit | new carry |
+|---|---|---|---|---|
+| 7 | 1 | 1 + 1 = 2 | **0** | 1 |
+| 6 | 0 | 0 + 1 = 1 | **1** | 0 → stop |
+
+✅ **Output:** `-2 = 1111 1110`
+
+---
+
+### Example C — `number = -128`  (expected `1000 0000`, the most negative)
+
+| Step | Bits | Note |
+|------|------|------|
+| STEP 1: +128 in binary | `1000 0000` | |
+| STEP 2: flip all bits | `0111 1111` | |
+| STEP 3: add 1 | `1000 0000` | the `1` ripples all the way across |
+
+**Add-1 detail — the carry "ripples":**
+
+| i (right→left) | bit | bit + carry | new bit | new carry |
+|---|---|---|---|---|
+| 7 | 1 | 2 | 0 | 1 |
+| 6 | 1 | 2 | 0 | 1 |
+| 5 | 1 | 2 | 0 | 1 |
+| 4 | 1 | 2 | 0 | 1 |
+| 3 | 1 | 2 | 0 | 1 |
+| 2 | 1 | 2 | 0 | 1 |
+| 1 | 1 | 2 | 0 | 1 |
+| 0 | 0 | 1 | 1 | 0 → stop |
+
+✅ **Output:** `-128 = 1000 0000`  *(sign bit 1, everything else 0)*
+
+---
+
+### Example D — `number = +7`  (positive → no special steps)
+
+Positive numbers skip the flip-and-add entirely; just write normal binary:
+
+| Box index (i) | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|---|
+| bit | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 |
+
+✅ **Output:** `+7 = 0000 0111`  *(sign bit 0 = positive)*
+
+---
+
+### 🔁 Sanity check: does `5 + (-5)` give `0`?
+
+Two's complement is designed so normal binary addition "just works":
+
+```
+   0000 0101   (+5)
+ + 1111 1011   (-5)
+ -----------
+  10000 0000
+```
+The leftmost `1` is a **9th** bit — but we only keep **8** boxes, so it falls off
+the edge and is thrown away, leaving `0000 0000` = **0**. 🎉 That overflow-wrap is
+exactly *why* this representation was chosen.
+
+---
+
 ## 8. Hand-check table (memorise a few) 📋
 
 | Number | 8-bit two's complement | Note |

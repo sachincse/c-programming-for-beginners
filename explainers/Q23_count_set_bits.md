@@ -139,6 +139,63 @@ int main(void) {
 
 ---
 
+## 7½. More worked examples — every single iteration 🔬
+
+### Example A — `number = 7`  (binary `111`, expected `3`)
+
+| Step | `number` before | `% 2` | set bit? | `count` after | `/ 2` |
+|------|------|------|------|------|------|
+| 1 | 7 | 1 | ✅ | 1 | 3 |
+| 2 | 3 | 1 | ✅ | 2 | 1 |
+| 3 | 1 | 1 | ✅ | 3 | 0 |
+| — | 0 | stop | — | — | — |
+
+✅ **Output:** `3`  *(all three bits are 1)*
+
+---
+
+### Example B — `number = 8`  (binary `1000`, expected `1`)
+
+| Step | `number` before | `% 2` | set bit? | `count` after | `/ 2` |
+|------|------|------|------|------|------|
+| 1 | 8 | 0 | ❌ | 0 | 4 |
+| 2 | 4 | 0 | ❌ | 0 | 2 |
+| 3 | 2 | 0 | ❌ | 0 | 1 |
+| 4 | 1 | 1 | ✅ | 1 | 0 |
+| — | 0 | stop | — | — | — |
+
+✅ **Output:** `1`  *(only the top bit is 1)*
+
+---
+
+### Example C — `number = 10`  (binary `1010`, expected `2`)
+
+| Step | `number` before | `% 2` | set bit? | `count` after | `/ 2` |
+|------|------|------|------|------|------|
+| 1 | 10 | 0 | ❌ | 0 | 5 |
+| 2 | 5  | 1 | ✅ | 1 | 2 |
+| 3 | 2  | 0 | ❌ | 1 | 1 |
+| 4 | 1  | 1 | ✅ | 2 | 0 |
+| — | 0 | stop | — | — | — |
+
+✅ **Output:** `2`  *(the 1s are in `1010`)*
+
+---
+
+### Example D — `number = 15`  (binary `1111`, expected `4`)
+
+| Step | `number` before | `% 2` | set bit? | `count` after | `/ 2` |
+|------|------|------|------|------|------|
+| 1 | 15 | 1 | ✅ | 1 | 7 |
+| 2 | 7  | 1 | ✅ | 2 | 3 |
+| 3 | 3  | 1 | ✅ | 3 | 1 |
+| 4 | 1  | 1 | ✅ | 4 | 0 |
+| — | 0 | stop | — | — | — |
+
+✅ **Output:** `4`  *(all four bits ON)*
+
+---
+
 ## 8. ⚡ Bonus: the clever fast version (Brian Kernighan's trick)
 
 There's a famous shortcut that loops **only as many times as there are 1s**:

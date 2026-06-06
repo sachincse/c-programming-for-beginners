@@ -164,6 +164,79 @@ int main(void) {
 
 ---
 
+## 7½. More worked examples — every single call 🔬
+
+### Example A — `factorial(5)`  (expected `120`)
+
+**Going DOWN (each call waits for a smaller one):**
+
+| Call | Base case? | Returns (waits for…) |
+|------|-----------|----------------------|
+| `factorial(5)` | no | `5 * factorial(4)` |
+| `factorial(4)` | no | `4 * factorial(3)` |
+| `factorial(3)` | no | `3 * factorial(2)` |
+| `factorial(2)` | no | `2 * factorial(1)` |
+| `factorial(1)` | ✅ | `1`  ← STOP |
+
+**Coming back UP (now do the math):**
+
+| Finishing call | Calculation | Result |
+|----------------|-------------|--------|
+| `factorial(1)` | base | 1 |
+| `factorial(2)` | 2 × 1 | 2 |
+| `factorial(3)` | 3 × 2 | 6 |
+| `factorial(4)` | 4 × 6 | 24 |
+| `factorial(5)` | 5 × 24 | **120** |
+
+✅ **Output:** `5! = 120`
+
+---
+
+### Example B — `factorial(6)`  (expected `720`)
+
+Down to the base case, then multiply back up:
+
+| Finishing call | Calculation | Result |
+|----------------|-------------|--------|
+| `factorial(1)` | base | 1 |
+| `factorial(2)` | 2 × 1 | 2 |
+| `factorial(3)` | 3 × 2 | 6 |
+| `factorial(4)` | 4 × 6 | 24 |
+| `factorial(5)` | 5 × 24 | 120 |
+| `factorial(6)` | 6 × 120 | **720** |
+
+✅ **Output:** `6! = 720`
+
+---
+
+### Example C — `factorial(0)`  (expected `1`)
+
+The very first call hits the base case immediately:
+
+| Call | Base case? | Returns |
+|------|-----------|---------|
+| `factorial(0)` | ✅ (`n == 0`) | `1` |
+
+No multiplication happens at all. ✅ **Output:** `0! = 1`
+
+---
+
+### Example D — `factorial(3)` drawn as a "stack" 🥞
+
+This shows how the computer **stacks** unfinished calls, then unwinds them:
+
+```
+PUSH  factorial(3)  → needs 3 * factorial(2)
+PUSH  factorial(2)  → needs 2 * factorial(1)
+PUSH  factorial(1)  → BASE → returns 1
+POP   factorial(2)  → 2 * 1 = 2
+POP   factorial(3)  → 3 * 2 = 6  ✅
+```
+
+✅ **Output:** `3! = 6`
+
+---
+
 ## 8. Common mistakes ⚠️
 
 - **No base case** (or wrong one) → infinite recursion → program crashes
