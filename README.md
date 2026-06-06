@@ -14,9 +14,21 @@
 
 1. 📖 **[The Concepts Primer](00_concepts_primer.md)** — what is code, a variable, a
    loop, binary, two's complement, recursion. *Read this first.*
-2. 📅 **[Day 6 — Numbers & Bits (Q21–Q24)](docs/day6.md)**
-3. 📅 **[Day 7 — Recursion (Q25–Q28)](docs/day7.md)**
+2. 📚 **[Deep-Dive Explainers (one per question)](explainers/)** — ⭐ **the main course.**
+   Each question has its **own lesson**: analogy → logic → diagram → step-by-step
+   code build → full code → **line-by-line dry run** → pitfalls.
+3. 📅 Quick overviews with diagrams: **[Day 6 (Q21–Q24)](docs/day6.md)** ·
+   **[Day 7 (Q25–Q28)](docs/day7.md)**
 4. 💻 Open the matching file in [`src/`](src/) and read the comments line by line.
+
+### 🎯 Jump straight to a question's explainer
+| Day 6 | Day 7 |
+|-------|-------|
+| [Q21 Decimal → Binary](explainers/Q21_decimal_to_binary.md) | [Q25 Factorial](explainers/Q25_recursive_factorial.md) |
+| [Q22 Binary → Decimal](explainers/Q22_binary_to_decimal.md) | [Q26 Fibonacci](explainers/Q26_recursive_fibonacci.md) |
+| [Q23 Count Set Bits](explainers/Q23_count_set_bits.md) | [Q27 Sum of Digits](explainers/Q27_recursive_sum_of_digits.md) |
+| [Q24 Power xⁿ](explainers/Q24_power_without_pow.md) | [Q28 Reverse Number](explainers/Q28_recursive_reverse_number.md) |
+| ⭐ [Negative → Binary (two's complement)](explainers/negative_two_complement.md) | |
 
 ---
 
@@ -126,9 +138,12 @@ gcc q21_decimal_to_binary.c -o q21
 c-programming-for-beginners/
 ├── README.md                  ← you are here (the big picture)
 ├── 00_concepts_primer.md      ← read first: every concept explained
+├── explainers/                ← ⭐ one deep-dive lesson PER question (with dry runs)
+│   ├── Q21_decimal_to_binary.md ... Q28_recursive_reverse_number.md
+│   └── negative_two_complement.md
 ├── docs/
-│   ├── day6.md                ← Q21–Q24 with diagrams
-│   └── day7.md                ← Q25–Q28 with diagrams
+│   ├── day6.md                ← Q21–Q24 quick overview with diagrams
+│   └── day7.md                ← Q25–Q28 quick overview with diagrams
 └── src/                       ← runnable, heavily-commented C code
     ├── q21_decimal_to_binary.c
     ├── q22_binary_to_decimal.c
