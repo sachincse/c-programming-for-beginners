@@ -1,0 +1,20 @@
+# Compiled C programs / binaries
+*.exe
+*.o
+*.out
+q21
+q22
+q23
+q24
+q25
+q26
+q27
+q28
+neg
+a.out
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
